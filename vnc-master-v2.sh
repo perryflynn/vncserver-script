@@ -4,7 +4,7 @@ USERHOME=""
 IUSER=""
 
 # Include functions
-. vnc-functions.sh
+. /home/vnc-functions.sh
 
 # Walk user homes
 for USERHOME in /home/*; do
