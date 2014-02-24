@@ -7,6 +7,7 @@ This repo provides a collection of scripts to host a server with multiple vncser
 * `vnc-add-custom-resolutions.sh` Called by xstartup. Will add custom resolutions to xrandr.
 * `exampleuser/vncsettings.ini` Placed in all user home folders. This ini provides settings for all vnc sessions.
 * `exampleuser/.vnc/xstartup` Startscript, will called by vncserver process.
+* `exampleuser/.config/openbox/menu.xml` Example for openbox menu integration.
 
 Features
 --------
