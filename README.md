@@ -31,3 +31,13 @@ Screenshots
 -----------
 
 ![Resolution Menu](/screen-resolutionmenu.png "Resolution Menu")
+
+Server Components:
+* Guacamole web remote desktop
+* Nginx web proxy
+* TightVNC
+* OpenBox
+* lxpanel
+* conky
+
+![The Desktop](/screen-desktop.png "The Desktop")
