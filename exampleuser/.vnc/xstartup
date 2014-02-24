@@ -2,9 +2,10 @@
 
 xrdb $HOME/.Xresources
 xsetroot -solid grey
+/home/vnc-add-custom-resolutions.sh
 vncconfig -iconic &
 export XKL_XMODMAP_DISABLE=1
-pypanel &
+lxpanel &
 clipit &
 conky &
 openbox-session &

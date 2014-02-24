@@ -5,20 +5,20 @@ function getprop() {
    local PROPFILE="$USERHOME/vncsettings.ini"
 
    if [ -f "$PROPFILE" ]; then
-      cat "$PROPFILE" | grep -v -E "^#" | grep -E "^${PROP}=" | cut -d '=' -f2 | head -n 1 | sed -e 's/^ *//g' -e 's/ *$//g'
+      cat "$PROPFILE" | grep -v -E "^#" | grep -E "^${PROP}=" | cut -d '=' -f2 | head -n 1 | sed -e 's/^ *//g' -e 's/ *$//g' | sed 's/([^a-zA-Z0-9_\.,])/\\$1/g'
    fi
 }
 
 function startserver() {
-   local resx="$(getprop "resolution_x")"
-   local resy="$(getprop "resolution_y")"
-   local port="$(getprop "tcp_port")"
+   local port="$(getprop "tcp_port" | sed 's/[^0-9]//g')"
 
-   if [ "$resx" == "" ] || [ "$resy" == "" ] || [ "$port" == "" ]; then
+   if [ "$port" == "" ]; then
       return 2
    else
       # Perform start and get display name
-      OUT=$(su $IUSER -c "vncserver -rfbport $port -interface 127.0.0.1 -localhost -geometry ${resx}x${resy}" 2>&1)
+      CMD="vncserver -rfbport $port -interface 127.0.0.1 -localhost -geometry 1024x768"
+      echolog "VNC startup command: $CMD"
+      OUT=$(su $IUSER -c "$CMD" 2>&1)
       DNAME=$(echo -e "$OUT" | grep "desktop is" | awk -F" " '{print $(NF)}')
       echolog "Detected Displayname: $DNAME"
 
@@ -46,5 +46,3 @@ function echolog() {
    fi
    chmod a+r "$logfile"
 }
-
-# EOF

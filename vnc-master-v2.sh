@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -d "/home/.vnc-master.lock" ]; then
+   exit 1;
+fi
+
+touch /home/.vnc-master.lock
+
+
 USERHOME=""
 IUSER=""
 
@@ -70,3 +77,5 @@ for USERHOME in /home/*; do
 
    fi
 done
+
+rm /home/.vnc-master.lock
